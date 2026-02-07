@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: supplies-db
+    environment:
+      POSTGRES_DB: supplies
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - supplies_pgdata:/var/lib/postgresql/data
+
+volumes:
+  supplies_pgdata:
