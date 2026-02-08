@@ -67,6 +67,13 @@ public class SupplyService {
         return toResponse(saved);
     }
 
+    @Transactional(readOnly = true)
+    public SupplyResponse getById(Long id) {
+        Supply supply = supplyRepository.findWithDetailsById(id)
+                .orElseThrow(() -> new NotFoundException("Supply not found" + id));
+        return toResponse(supply);
+    }
+
     private SupplyResponse toResponse(Supply supply) {
         SupplyResponse response = new SupplyResponse();
         response.setId(supply.getId());

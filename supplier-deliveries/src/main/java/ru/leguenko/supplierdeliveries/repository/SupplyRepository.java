@@ -1,5 +1,6 @@
 package ru.leguenko.supplierdeliveries.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,6 +9,7 @@ import ru.leguenko.supplierdeliveries.repository.projection.SupplyAggRow;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface SupplyRepository extends JpaRepository<Supply, Long> {
     @Query("""
@@ -31,4 +33,7 @@ public interface SupplyRepository extends JpaRepository<Supply, Long> {
             @Param("from") LocalDateTime from,
             @Param("toExclusive") LocalDateTime toExclusive
     );
+
+    @EntityGraph(attributePaths = {"supplier", "lines", "lines.product"})
+    Optional<Supply> findWithDetailsById(Long id);
 }

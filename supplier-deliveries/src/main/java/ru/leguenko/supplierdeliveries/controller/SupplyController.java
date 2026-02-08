@@ -1,10 +1,7 @@
 package ru.leguenko.supplierdeliveries.controller;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.leguenko.supplierdeliveries.dto.supply.CreateSupplyRequest;
 import ru.leguenko.supplierdeliveries.dto.supply.SupplyResponse;
 import ru.leguenko.supplierdeliveries.service.SupplyService;
@@ -22,5 +19,10 @@ public class SupplyController {
     @PostMapping
     public SupplyResponse create(@Valid @RequestBody CreateSupplyRequest request) {
         return supplyService.create(request);
+    }
+
+    @GetMapping("/{id}")
+    public SupplyResponse get(@PathVariable Long id) {
+        return supplyService.getById(id);
     }
 }

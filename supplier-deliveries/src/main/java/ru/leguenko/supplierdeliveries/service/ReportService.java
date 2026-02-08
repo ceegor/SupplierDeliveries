@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.leguenko.supplierdeliveries.dto.report.ReportProductRowDto;
 import ru.leguenko.supplierdeliveries.dto.report.ReportSupplierBlockDto;
 import ru.leguenko.supplierdeliveries.dto.report.SuppliesReportResponse;
+import ru.leguenko.supplierdeliveries.entity.ProductCategory;
 import ru.leguenko.supplierdeliveries.repository.SupplyRepository;
 import ru.leguenko.supplierdeliveries.repository.projection.SupplyAggRow;
 
@@ -54,7 +55,7 @@ public class ReportService {
             pr.setProductId(r.getProductId());
             pr.setProductCode(r.getProductCode());
             pr.setProductName(r.getProductName());
-            pr.setProductCategory(r.getProductCategory());
+            pr.setProductCategory(ProductCategory.valueOf(r.getProductCategory()));
             pr.setTotalWeightKg(w.setScale(3, RoundingMode.HALF_UP));
             pr.setTotalAmount(a.setScale(2, RoundingMode.HALF_UP));
 
